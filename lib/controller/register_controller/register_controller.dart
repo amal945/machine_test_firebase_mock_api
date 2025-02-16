@@ -129,6 +129,16 @@ String fullName = fullNameController.text.trim();
       return false;
     }
 
+    if(confirmPasswordController.text.trim().isEmpty){
+      showCustomSnackBar(title: "Error", message: "Password field can't be empty!", color: Colors.red);
+      return false;
+    }
+
+    if(confirmPasswordController.text.trim() != password){
+      showCustomSnackBar(title: "Error", message: "Passwords Does not Match!", color: Colors.red);
+      return false;
+    }
+
     if (password.length < 6) {
       showCustomSnackBar(title: "Error", message: "Password must be at least 6 characters!", color: Colors.red);
       return false;
