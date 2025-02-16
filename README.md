@@ -1,6 +1,6 @@
 # 🛒 Flutter E-Commerce Application
 
-A functional Flutter-based e-commerce application with modern UI with Animations,GetX state management, and Firebase integration.
+A functional Flutter-based e-commerce application with modern UI with Animations,GetX state management, and Firebase integration for Login,MOKE API For Products(Http).
 
 ## 📌 Features
 - 🛍️ Product Listings
