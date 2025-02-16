@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "591712058459",
+    "project_id": "e-commerce-machine-test",
+    "storage_bucket": "e-commerce-machine-test.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591712058459:android:2ecc4a4831cb217f36d37e",
+        "android_client_info": {
+          "package_name": "com.example.machine_test_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEhQvoP5uBMYwrJaZqWhlpagttqwJh0A8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
