@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import '../../model/cart_product_model.dart';
 import '../../model/product_model.dart';
 import '../../services/cart_service.dart';
@@ -44,8 +41,8 @@ RxBool isLoading = false.obs;
   void removeFromCart(CartOnlyModel item) async {
     isLoading.value = (!isLoading.value);
     cartProductList.remove(item);
-    calculateTotalAmount(); // Recalculate after removal
-    update(); // Notify UI
+    calculateTotalAmount();
+    update();
 
     final response = await CartService.removeFromCart(id: item.product.id);
 
@@ -71,7 +68,7 @@ RxBool isLoading = false.obs;
       final response = await GetProductService.getAllProducts();
       if (response.isNotEmpty) {
         allProductList.assignAll(response);
-        sortOutCartProducts(); // Ensure sorting is done after products are fetched
+        sortOutCartProducts();
       }
     } catch (e) {
       showCustomSnackBar(title: "Error", message: "$e", color: Colors.red);
@@ -79,20 +76,28 @@ RxBool isLoading = false.obs;
   }
 
   void sortOutCartProducts() {
-    for(int i =0;i<allProductList.length;i++){
-      for(int j =0;j<cartList.length;j++){
-        for(int k = 0;k < cartList[j].products.length;k++){
-          final allProductId = allProductList[i].id.toString();
-          final cartProductId = cartList[j].products[k].productId.toString();
-          if( allProductId == cartProductId ){
-           final data = CartOnlyModel(product:allProductList[i] , quantity:cartList[j].products[k].quantity);
-           cartProductList.add(data);
-         }
+    cartProductList.clear();
+
+    for (var cart in cartList) {
+      for (var cartItem in cart.products) {
+        final product = allProductList.firstWhereOrNull((p) => p.id.toString() == cartItem.productId.toString());
+
+        if (product != null) {
+
+          int existingIndex = cartProductList.indexWhere((p) => p.product.id == product.id);
+          if (existingIndex != -1) {
+
+            cartProductList[existingIndex].quantity += cartItem.quantity;
+          } else {
+
+            cartProductList.add(CartOnlyModel(product: product, quantity: cartItem.quantity));
+          }
         }
       }
     }
-    calculateTotalAmount(); //
+    calculateTotalAmount();
   }
+
   void calculateTotalAmount() {
     double total = 0.0;
     for (var cartItem in cartProductList) {

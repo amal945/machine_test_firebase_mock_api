@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'MACHINE TEST',
+      title: 'E-CART',
       theme: ThemeData(
         fontFamily: "Montserrat",
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
